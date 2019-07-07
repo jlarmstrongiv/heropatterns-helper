@@ -12,6 +12,8 @@ export const FileType = {
 };
 
 export const getMetadata = heroPatternText => {
+  if (!heroPatternText) throw new Error('No pattern provided');
+
   // regex must be reset
   // https://stackoverflow.com/questions/4724701/regexp-exec-returns-null-sporadically
   const widthRegex = /width='(\d+)'/g;
@@ -37,7 +39,7 @@ export const getMetadata = heroPatternText => {
   const editedSvg = `${originalSvg.slice(
     0,
     bracketIndex,
-  )}<rectwidth='100%'height='100%'fill='#${backgroundColor}'></rect>${originalSvg.slice(
+  )}<rect width='100%' height='100%' fill='#${backgroundColor}'></rect>${originalSvg.slice(
     bracketIndex,
     originalSvg.length,
   )}`;
@@ -76,7 +78,14 @@ export const toSvg = async heroPatternSvg => {
   return Buffer.from(heroPatternSvg);
 };
 
-export const toZip = async (heroPatternSvg, files = {}, fileName, licenseText = '') => {
+export const toZip = async (
+  heroPatternSvg,
+  files = {},
+  fileName,
+  licenseText = '',
+) => {
+  if (!heroPatternSvg) throw new Error('No pattern provided');
+
   const jpeg = files[FileType.JPEG] || (await toJpeg(heroPatternSvg));
   const png = files[FileType.PNG] || (await toPng(heroPatternSvg));
   const svg = files[FileType.SVG] || (await toSvg(heroPatternSvg));
