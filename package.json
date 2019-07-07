@@ -24,5 +24,8 @@
     "fast-glob": "^3.0.4",
     "fs-extra": "^8.1.0",
     "nodemon": "^1.19.1"
+  },
+  "peerDependencies": {
+    "sharp": "^0.22.1"
   }
 }
