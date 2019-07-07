@@ -23,7 +23,7 @@ yarn add heropatterns-helper sharp
 #### Import the library
 
 ```js
-const heropatterns = require('heropatterns');
+const heropatterns = require('heropatterns-helper');
 
 const {
   toJpeg,
@@ -32,7 +32,7 @@ const {
   toZip,
   getMetadata,
   FileType,
-} = require('heropatterns');
+} = require('heropatterns-helper');
 ```
 
 #### Helper functions
