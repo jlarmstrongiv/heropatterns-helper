@@ -18,6 +18,8 @@ Install with Yarn.
 yarn add heropatterns-helper sharp
 ```
 
+Please note that `heropatterns-helper` depends on [Sharp.js](https://github.com/lovell/sharp) for `toJpeg`, `toPng`, and `toZip`. However, adding Sharp.js as a dependency, peer dependency, or optional dependency may complicate building its native module for your desired platform. The method of installing Sharp.js is up to your discretion.
+
 ### Setup and Usage
 
 #### Import the library
