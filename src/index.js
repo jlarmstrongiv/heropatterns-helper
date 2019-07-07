@@ -20,12 +20,16 @@ export const getMetadata = heroPatternText => {
   const heightRegex = /height='(\d+)'/g;
   const svgRegex = /data:image\/svg\+xml,(.*)"\);/g;
   const backgroundColorRegex = /background-color: #(.{1,6});/g;
+  const foregroundColorRegex = /fill='%23(.{1,6})/g;
 
   heroPatternText = heroPatternText.trim();
 
   // https://regexr.com/
   const width = widthRegex.exec(heroPatternText)[1];
   const height = heightRegex.exec(heroPatternText)[1];
+  const foregroundColor = foregroundColorRegex.exec(heroPatternText)[1];
+  const backgroundColor = backgroundColorRegex.exec(heroPatternText)[1];
+
   let originalSvg = svgRegex.exec(heroPatternText);
   originalSvg = decodeURIComponent(originalSvg[1]);
 
@@ -34,7 +38,6 @@ export const getMetadata = heroPatternText => {
   // https://stackoverflow.com/a/11293812
   // rectangle must be drawn first
   // https://stackoverflow.com/a/25302276
-  const backgroundColor = backgroundColorRegex.exec(heroPatternText)[1];
   const bracketIndex = originalSvg.indexOf('>') + 1;
   const editedSvg = `${originalSvg.slice(
     0,
@@ -43,10 +46,12 @@ export const getMetadata = heroPatternText => {
     bracketIndex,
     originalSvg.length,
   )}`;
+
   return {
     width,
     height,
     backgroundColor,
+    foregroundColor,
     svg: editedSvg,
   };
 };

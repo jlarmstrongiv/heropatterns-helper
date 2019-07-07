@@ -1,7 +1,7 @@
 {
   "name": "heropatterns-helper",
   "version": "0.0.0",
-  "description": "Helper functions to convert heropatterns to JPEGs, PNGs, SVGs, and ZIPs",
+  "description": "Node.js helper functions to convert heropatterns to JPEGs, PNGs, SVGs, and ZIPs",
   "main": "./dist/index.js",
   "repository": "git@github.com:jlarmstrongiv/heropatterns-helper.git",
   "author": "John Armstrong <jlarmst@g.clemson.edu>",

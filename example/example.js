@@ -36,10 +36,10 @@ const exportSample = async samplePath => {
   };
 
   const zip = await heroPatternHelper.toZip(
-    heroPatternText,
+    heroPatternSvg,
     files,
     outputName,
-    'MIT would be nice',
+    'License Text',
   );
   await fs.writeFile(`${outputFolder}/${outputName}/${outputName}.zip`, zip);
 };
