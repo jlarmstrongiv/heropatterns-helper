@@ -4,6 +4,13 @@ import AdmZip from 'adm-zip';
 import importLazy from 'import-lazy';
 const sharp = importLazy(() => require('sharp'))();
 
+/**
+ * @typedef {Object} FileType
+ * @property {string} JPEG - Key for JPEG buffers
+ * @property {string} PNG - Key for PNG buffers
+ * @property {string} SVG - Key for SVG buffers
+ * @property {string} ZIP - Key for ZIP buffers
+ */
 export const FileType = {
   JPEG: 'JPEG',
   PNG: 'PNG',
@@ -11,6 +18,11 @@ export const FileType = {
   ZIP: 'ZIP',
 };
 
+/**
+ * Convert heropattern CSS to SVG
+ * @param {string} heroPatternText - The original CSS text copied from heropatterns.com
+ * @returns {string} heroPatternSvg, SVG string of heropattern
+ */
 export const getMetadata = heroPatternText => {
   if (!heroPatternText) throw new Error('No pattern provided');
 
@@ -56,6 +68,11 @@ export const getMetadata = heroPatternText => {
   };
 };
 
+/**
+ * Convert SVG to JPEG buffer
+ * @param {string} heroPatternSvg - SVG string of heropattern
+ * @returns {Buffer} A buffer containing the JPEG of the heropattern
+ */
 export const toJpeg = async heroPatternSvg => {
   if (!heroPatternSvg) throw new Error('No pattern provided');
 
@@ -68,6 +85,11 @@ export const toJpeg = async heroPatternSvg => {
   return image;
 };
 
+/**
+ * Convert SVG to PNG buffer
+ * @param {string} heroPatternSvg - SVG string of heropattern
+ * @returns {Buffer} A buffer containing the PNG of the heropattern
+ */
 export const toPng = async heroPatternSvg => {
   if (!heroPatternSvg) throw new Error('No pattern provided');
 
@@ -78,11 +100,24 @@ export const toPng = async heroPatternSvg => {
   return image;
 };
 
+/**
+ * Convert SVG to SVG buffer
+ * @param {string} heroPatternSvg - SVG string of heropattern
+ * @returns {Buffer} A buffer containing the SVG of the heropattern
+ */
 export const toSvg = async heroPatternSvg => {
   if (!heroPatternSvg) throw new Error('No pattern provided');
   return Buffer.from(heroPatternSvg);
 };
 
+/**
+ * Convert SVG to ZIP buffer
+ * @param {string} heroPatternSvg - SVG string of heropattern
+ * @param {Object=} files - Object with FileType keys to re-use image buffers
+ * @param {string=} fileName - Filename for all image files inside the zip
+ * @param {string=} licenseText - Text for the LICENSE.txt file inside the zip
+ * @returns {Buffer} A buffer containing the ZIP of the heropattern images (JPEG, PNG, SVG) and a license file
+ */
 export const toZip = async (
   heroPatternSvg,
   files = {},
